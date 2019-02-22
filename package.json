@@ -1,0 +1,36 @@
+{
+  "name": "tweet-archive",
+  "version": "0.0.1",
+  "description": "Create a tweet archive.",
+  "main": "dist/index.js",
+  "scripts": {
+    "watch": "babel --watch src/ -d dist",
+    "build": "babel src -d dist"
+  },
+  "bin": {
+    "tweet-archive": "dist/commands/tweet-archive.js",
+    "tweet-archive-build": "dist/commands/tweet-archive-build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docnow/tweet-viewer-cli.git"
+  },
+  "author": "Ed Summers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/docnow/tweet-viewer-cli/issues"
+  },
+  "homepage": "https://github.com/docnow/tweet-viewer-cli#readme",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "tweet-viewer": "0.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.0.0"
+  }
+}
