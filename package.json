@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/docnow/tweet-viewer-cli.git"
+    "url": "git+https://github.com/docnow/tweet-archive.git"
   },
   "author": "Ed Summers",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/docnow/tweet-viewer-cli/issues"
+    "url": "https://github.com/docnow/tweet-archive/issues"
   },
-  "homepage": "https://github.com/docnow/tweet-viewer-cli#readme",
+  "homepage": "https://github.com/docnow/tweet-archive#readme",
   "dependencies": {
     "commander": "^2.19.0",
     "prop-types": "^15.7.2",
