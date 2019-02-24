@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
 import fs from 'fs'
-import program from 'commander'
+import opn from 'opn'
+import path from 'path'
 import chalk from 'chalk'
 import prompt from 'prompt'
+import program from 'commander'
+
 import Builder from './builder'
 
 function doPrompt() {
@@ -48,9 +51,9 @@ function doPrompt() {
 }
 
 program
-  .arguments('<ids> [dir]')
+  .arguments('<tweet-id-file> [archive-dir]')
   .action(async (ids, dir) => {
-    console.log('')
+    console.log('hi')
 
     if (! fs.existsSync(ids)) {
       console.log(chalk.red('Please supply valid tweet id file.\n'))
@@ -64,6 +67,9 @@ program
     const builder = new Builder()
     await builder.build(ids, metadata, dir)
     console.log(`\n🎉  Your tweet archive is ready in ${chalk.bold(dir)}\n`)
+
+    const url = 'file://' + path.resolve(path.join(dir, 'index.html'))
+    opn(url).then(process.exit(0))
   })
 
 program.parse(process.argv)

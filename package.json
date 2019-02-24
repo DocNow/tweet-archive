@@ -36,6 +36,7 @@
     "fs-extra": "^7.0.1",
     "html-webpack-plugin": "^3.2.0",
     "moment": "^2.24.0",
+    "opn": "^5.4.0",
     "prompt": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",

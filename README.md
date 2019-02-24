@@ -8,8 +8,8 @@ A command line utility for working with tweet archives.
 
 ## Build
 
-If you have a file of tweet identifiers you can build a tweet archive:
+If you have a file of tweet identifiers in `ids.csv` you can build a tweet archive in the directory `my-tweet-archive`:
 
-    tweet-archive ids.csv archive
+    tweet-archive build ids.csv archive
 
-Then you should be able to open `archive/index.html` in your browser.
+Then you should be able to open `my-tweet-archive/index.html` in your browser.
