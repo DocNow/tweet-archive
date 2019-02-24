@@ -7,7 +7,7 @@ const common = require('./webpack.config.js')
 module.exports = merge(common, {
   mode: 'development',
   entry: {
-    "tweet-archive": './src/app.js',
+    "tweet-archive": './src/index.js',
   },
   output: {
     filename: `[name].js`,
