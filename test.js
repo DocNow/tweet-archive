@@ -11,7 +11,7 @@ describe('tweet-archive', () => {
 
   it('should build', async () => {
     const builder = new Builder()
-    await builder.build('example/ids.csv', {title: "test"}, 'test-archive')
+    await builder.build('example/ids.csv', {title: "xyz"}, 'test-archive')
     expect(fs.existsSync('test-archive/js/data.js')).to.equal(true)
 
     // a trick to load the data file
@@ -19,6 +19,7 @@ describe('tweet-archive', () => {
     eval(fs.readFileSync('test-archive/js/data.js', 'utf8'))
 
     expect(__TWEET_ARCHIVE_DATA.ids.length).to.equal(299)
+    expect(__TWEET_ARCHIVE_DATA.metadata.title).to.equal('xyz')
   })
     
 })
