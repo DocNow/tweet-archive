@@ -40,7 +40,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "tweet-viewer": "0.0.3",
+    "tweet-viewer": "0.0.4",
     "webpack": "^4.29.5"
   },
   "devDependencies": {
@@ -51,6 +51,7 @@
     "chai": "^4.2.0",
     "mocha": "^6.0.1",
     "rimraf": "^2.6.3",
+    "style-loader": "^0.23.1",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.0",
     "webpack-merge": "^4.2.1"
