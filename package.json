@@ -2,14 +2,19 @@
   "name": "tweet-archive",
   "version": "0.0.1",
   "description": "Create a tweet archive.",
-  "main": "dist/index.js",
+  "main": "dist/cli/tweet-archive.js",
   "scripts": {
-    "watch": "babel --watch src/ -d dist",
-    "build": "babel src -d dist"
+    "start": "webpack-dev-server --config webpack.dev.config.js",
+    "clean": "rm -rf dist ; mkdir dist",
+    "build-app": "webpack --config webpack.config.js",
+    "build-cli": "babel src/cli -d dist/cli",
+    "copy-site": "cp -pr src/site dist/site",
+    "build": "npm run clean && npm run copy-site && npm run build-cli && npm run build-app",
+    "test": "npm run build && mocha --colors --reporter spec --require @babel/register test.js"
   },
   "bin": {
-    "tweet-archive": "dist/commands/tweet-archive.js",
-    "tweet-archive-build": "dist/commands/tweet-archive-build.js"
+    "tweet-archive": "dist/cli/tweet-archive.js",
+    "tweet-archive-build": "dist/cli/tweet-archive-build.js"
   },
   "repository": {
     "type": "git",
@@ -22,15 +27,35 @@
   },
   "homepage": "https://github.com/docnow/tweet-archive#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
     "commander": "^2.19.0",
+    "css-loader": "^2.1.0",
+    "fs-extra": "^7.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "tweet-viewer": "0.0.1"
+    "tweet-viewer": "0.0.3",
+    "webpack": "^4.29.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.0.0"
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.1",
+    "rimraf": "^2.6.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.0",
+    "webpack-merge": "^4.2.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ]
   }
 }
