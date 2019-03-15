@@ -1,13 +1,13 @@
 {
   "name": "tweet-archive",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "description": "A command line tool for working with tweet archives.",
   "main": "dist/cli/tweet-archive.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.config.js",
     "clean": "rm -rf dist ; mkdir dist",
-    "build-app": "webpack --config webpack.config.js",
-    "build-cli": "babel src/cli -d dist/cli",
+    "start": "cross-env BABEL_ENV=browser webpack-dev-server --config webpack.dev.config.js",
+    "build-app": "cross-env BABEL_ENV=browser webpack --config webpack.config.js",
+    "build-cli": "cross-env BABEL_ENV=cli babel src/cli -d dist/cli",
     "copy-site": "cp -pr src/site dist/site",
     "build": "npm run clean && npm run copy-site && npm run build-cli && npm run build-app",
     "test": "npm run build && mocha --colors --reporter spec --require @babel/register test.js"
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/docnow/tweet-archive#readme",
   "dependencies": {
+    "@babel/runtime": "^7.3.4",
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "css-loader": "^2.1.0",
@@ -44,13 +45,15 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
+    "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
-    "@babel/preset-react": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.15.1",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-react": "^7.12.4",
@@ -62,9 +65,26 @@
     "webpack-merge": "^4.2.1"
   },
   "babel": {
-    "presets": [
-      "@babel/preset-react",
-      "@babel/preset-env"
-    ]
+    "env": {
+      "browser": {
+        "presets": [
+          "@babel/preset-react",
+          "@babel/preset-env"
+        ]
+      },
+      "cli": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "useBuiltIns": false
+            }
+          ]
+        ],
+        "plugins": [
+          "@babel/plugin-transform-runtime"
+        ]
+      }
+    }
   }
 }
