@@ -1,6 +1,6 @@
 {
   "name": "tweet-archive",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A command line tool for working with tweet archives.",
   "main": "dist/cli/tweet-archive.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "tweet-viewer": "0.0.4",
+    "tweet-viewer": "0.0.8",
     "webpack": "^4.29.5"
   },
   "devDependencies": {
@@ -49,7 +49,11 @@
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
+    "eslint": "^5.15.1",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-react": "^7.12.4",
     "mocha": "^6.0.1",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",

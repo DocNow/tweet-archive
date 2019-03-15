@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Metadata.css';
 
-class Metadata extends Component {
+class Metadata extends React.Component {
   constructor() {
     super()
     this.months = [
@@ -28,19 +28,25 @@ class Metadata extends Component {
   }
 
   render() {
-    return [
-      <h1 className="Title">{this.props.metadata.title}</h1>,
-      <div className="Description">{this.props.metadata.desc}</div>,
-      <div className="Metadata">
-        <div><span className="Label">Created by:</span> {this.props.metadata.creator}</div>
-        <div>
-          <span className="Label">Twitter search query:</span>
-          <span className="Query">{this.props.metadata.searchQuery}</span>
+    return(
+      <div>
+        <h1 className="Title">{this.props.metadata.title}</h1>
+        <div className="Description">{this.props.metadata.desc}</div>
+        <div className="Metadata">
+          <div><span className="Label">
+            Created by:</span> {this.props.metadata.creator}
+          </div>
+          <div>
+            <span className="Label">Twitter search query:</span>
+            <span className="Query">{this.props.metadata.searchQuery}</span>
+          </div>
+          <div>
+            <span className="Label">Tweets archived between:</span> 
+            {this.formatDate(this.props.metadata.startDate)} - <br/>{this.formatDate(this.props.metadata.endDate)}
+          </div>
         </div>
-        <div><span className="Label">Tweets archived between:</span> 
-          {this.formatDate(this.props.metadata.startDate)} - <br/>{this.formatDate(this.props.metadata.endDate)}</div>
       </div>
-    ]
+    )
   }
 }
 
