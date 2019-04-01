@@ -7,9 +7,10 @@ import './App.css'
 
 class App extends React.Component {
   render() {
+    const metadata = Object.assign({}, this.props.metadata, {total: this.props.tweetIds.length})
     return(
       <div id="App">
-        <Metadata metadata={this.props.metadata} />
+        <Metadata metadata={metadata} />
         <TweetViewer tweetIds={this.props.tweetIds} />
       </div>
     )
