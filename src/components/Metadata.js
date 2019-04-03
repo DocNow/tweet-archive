@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Range from 'rc-slider/lib/Range';
 import './Metadata.css';
-import 'rc-slider/assets/index.css';
 
 class Metadata extends React.Component {
   constructor() {
@@ -36,11 +34,6 @@ class Metadata extends React.Component {
   }
 
   render() {
-    // Bring range of tweets to a more manageable number
-    let maxRange = this.props.metadata.total
-    while (maxRange > 100) {
-      maxRange = Math.floor(maxRange / 100)
-    }
     return(
       <div>
         <h1 className="Title">{this.props.metadata.title}</h1>
@@ -57,13 +50,6 @@ class Metadata extends React.Component {
             <span className="Label">Tweets archived between:</span> 
             {this.formatDate(this.startDate)} - <br/>{this.formatDate(this.endDate)}
           </div>
-          <div>
-            <span className="Label">Only show tweets between dates:</span>
-          </div>
-        </div>
-        <div>
-          <span className="Label">Limit number of tweets</span>
-          <Range allowCross={false} min={0} max={maxRange}/>
         </div>
       </div>
     )
