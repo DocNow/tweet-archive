@@ -4,3 +4,11 @@
   padding: 0 auto;
   max-width: 550px;
 }
+
+.Operations > div {
+  line-height: 2em;
+}
+
+.OpsLabel {
+  font-style: italic;
+}

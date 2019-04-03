@@ -5,7 +5,7 @@
   "main": "dist/cli/tweet-archive.js",
   "scripts": {
     "clean": "rm -rf dist ; mkdir dist",
-    "start": "cross-env BABEL_ENV=browser webpack-dev-server --config webpack.dev.config.js",
+    "start": "cross-env BABEL_ENV=browser webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0",
     "build-app": "cross-env BABEL_ENV=browser webpack --config webpack.config.js",
     "build-cli": "cross-env BABEL_ENV=cli babel src/cli -d dist/cli",
     "copy-site": "cp -pr src/site dist/site",
@@ -60,6 +60,7 @@
     "mocha": "^6.0.1",
     "rc-slider": "^8.6.8",
     "rimraf": "^2.6.3",
+    "shake.js": "^1.2.2",
     "style-loader": "^0.23.1",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.0",
