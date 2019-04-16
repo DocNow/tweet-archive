@@ -53,7 +53,6 @@ function doPrompt() {
 program
   .arguments('<tweet-id-file> [archive-dir]')
   .action(async (ids, dir) => {
-    console.log('hi')
 
     if (! fs.existsSync(ids)) {
       console.log(chalk.red('Please supply valid tweet id file.\n'))

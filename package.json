@@ -1,6 +1,6 @@
 {
   "name": "tweet-archive",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A command line tool for working with tweet archives.",
   "main": "dist/cli/tweet-archive.js",
   "scripts": {
