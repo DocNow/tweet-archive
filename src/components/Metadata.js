@@ -21,10 +21,16 @@ class Metadata extends React.Component {
     ]
   }
   
+  get startDate() {
+    return new Date(this.props.metadata.startDate)
+  }
+
+  get endDate() {
+    return new Date(this.props.metadata.endDate)
+  }
 
   formatDate(date) {
-    const d = new Date(date);
-    return `${d.getDate()} ${this.months[d.getMonth()]}, ${d.getFullYear()}`
+    return `${date.getDate()} ${this.months[date.getMonth()]}, ${date.getFullYear()}`
   }
 
   render() {
@@ -42,7 +48,7 @@ class Metadata extends React.Component {
           </div>
           <div>
             <span className="Label">Tweets archived between:</span> 
-            {this.formatDate(this.props.metadata.startDate)} - <br/>{this.formatDate(this.props.metadata.endDate)}
+            {this.formatDate(this.startDate)} - <br/>{this.formatDate(this.endDate)}
           </div>
         </div>
       </div>
