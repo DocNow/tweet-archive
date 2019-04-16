@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import Builder from './dist/cli/builder'
+import Builder from './dist/builder'
 import fs from 'fs'
 import rimraf from 'rimraf'
 

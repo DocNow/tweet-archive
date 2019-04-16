@@ -1,16 +1,17 @@
 {
   "name": "tweet-archive",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A command line tool for working with tweet archives.",
-  "main": "dist/cli/tweet-archive.js",
+  "main": "dist/builder.js",
   "scripts": {
     "clean": "rm -rf dist ; mkdir dist",
     "start": "cross-env BABEL_ENV=browser webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0",
     "build-app": "cross-env BABEL_ENV=browser webpack --config webpack.config.js",
     "build-cli": "cross-env BABEL_ENV=cli babel src/cli -d dist/cli",
+    "build-lib": "cross-env BABEL_ENV=cli babel src/builder.js -d dist/",
     "copy-site": "cp -pr src/site dist/site",
-    "build": "npm run clean && npm run copy-site && npm run build-cli && npm run build-app",
-    "test": "npm run build && mocha --colors --reporter spec --require @babel/register test.js"
+    "build": "npm run clean && npm run copy-site && npm run build-cli && npm run build-lib && npm run build-app",
+    "test": "npm run build && cross-env BABEL_ENV=cli mocha --colors --reporter spec --require @babel/register test.js"
   },
   "bin": {
     "tweet-archive": "dist/cli/tweet-archive.js",

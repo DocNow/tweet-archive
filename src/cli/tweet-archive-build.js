@@ -7,7 +7,7 @@ import chalk from 'chalk'
 import prompt from 'prompt'
 import program from 'commander'
 
-import Builder from './builder'
+import Builder from '../builder'
 
 function doPrompt() {
 

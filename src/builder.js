@@ -10,7 +10,7 @@ class Builder {
   }
 
   async makeOutputDirectory(outputDir) {
-    await fs.copy(path.join(__dirname, '../site'), outputDir)
+    await fs.copy(path.join(__dirname, './site'), outputDir)
   }
 
   createDataFile(tweetIdFile, metadata, outputDir) {
