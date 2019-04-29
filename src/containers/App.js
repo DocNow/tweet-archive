@@ -11,10 +11,12 @@ import './App.css'
 class App extends React.Component {
   constructor() {
     super()
+    const steps = 30
     this.state = {
       firstStep: 0,
-      lastStep: Infinity
+      lastStep: steps
     }
+    this.steps = steps
   }
 
   componentDidMount() {
@@ -34,9 +36,8 @@ class App extends React.Component {
   reduceIds(tweetsPerStep) {
     // const tot = this.state.tweetIds.length
     const firstStep = this.state.firstStep
-    const lastStep = this.state.lastStep === Infinity ? 30 : this.state.lastStep
     return this.state.tweetIds.reduce((acc, id, idx) => {
-      if (idx >= tweetsPerStep * firstStep && idx < tweetsPerStep * lastStep) {
+      if (idx >= tweetsPerStep * firstStep && idx < tweetsPerStep * this.state.lastStep) {
         acc.push(id)
       }
       return acc
@@ -46,7 +47,7 @@ class App extends React.Component {
   resetIds() {
     this.setState({
       firstStep: 0,
-      lastStep: Infinity
+      lastStep: this.steps
     })
   }
 
@@ -78,23 +79,21 @@ class App extends React.Component {
       return null
     }
     // Bring range of tweets to a more manageable number
-    const steps = 30
     let maxRange = this.state.tweetIds.length
     let tweetIds = this.state.tweetIds
     let slider = null
-    if (maxRange > 30) {
-      maxRange = Math.ceil(this.state.tweetIds.length / steps)
+    if (maxRange > this.steps) {
+      maxRange = Math.ceil(this.state.tweetIds.length / this.steps)
       tweetIds = this.reduceIds(maxRange)
       const marks = {}
       const firstStepTweets = this.state.firstStep === 0 ? 0 : maxRange * this.state.firstStep
       marks[this.state.firstStep] = firstStepTweets
-      const lastStep = this.state.lastStep === Infinity ? steps : this.state.lastStep
       const lastStepTweets = this.state.lastStep === Infinity ? this.state.tweetIds.length : maxRange * this.state.lastStep
-      marks[lastStep] = lastStepTweets
+      marks[this.state.lastStep] = lastStepTweets
       slider = (
         <div style={{marginBottom: '3em'}}>
           <span className="OpsLabel">Limit number of tweets</span>
-          <Range allowCross={false} min={0} max={steps} defaultValue={[0, steps]} onChange={(r) => this.onSlide(r)}
+          <Range allowCross={false} min={0} max={this.steps} value={[this.state.firstStep, this.state.lastStep]} onChange={(r) => this.onSlide(r)}
             marks={marks}/>
         </div>
       )
