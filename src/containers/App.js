@@ -31,18 +31,12 @@ class App extends React.Component {
     }, false)
   }
 
-  reduceIds(steps) {
-    const tot = this.state.tweetIds.length 
-    const tweetsPerStep = Math.floor(tot / steps)
-    const remainder = tot - (tweetsPerStep * steps)
+  reduceIds(tweetsPerStep) {
+    // const tot = this.state.tweetIds.length
     const firstStep = this.state.firstStep
-    const lastStep = this.state.lastStep === Infinity ? steps : this.state.lastStep
+    const lastStep = this.state.lastStep === Infinity ? 30 : this.state.lastStep
     return this.state.tweetIds.reduce((acc, id, idx) => {
       if (idx >= tweetsPerStep * firstStep && idx < tweetsPerStep * lastStep) {
-        acc.push(id)
-      }
-      // edge case for remainder when all ranges are selected
-      if (remainder && lastStep === steps && idx >= tweetsPerStep * lastStep) {
         acc.push(id)
       }
       return acc
@@ -58,7 +52,7 @@ class App extends React.Component {
 
   onSlide(values) {
     if (values[0] === values[1]) {
-      // TODO: We need to find a way to prevent this from happening, but can't find anything on the API docs.
+      // no-op
     } else {
       this.setState({
         firstStep: values[0],
@@ -84,23 +78,36 @@ class App extends React.Component {
       return null
     }
     // Bring range of tweets to a more manageable number
+    const steps = 30
     let maxRange = this.state.tweetIds.length
-    while (maxRange > 100) {
-      maxRange = Math.floor(maxRange / 100)
+    let tweetIds = this.state.tweetIds
+    let slider = null
+    if (maxRange > 30) {
+      maxRange = Math.ceil(this.state.tweetIds.length / steps)
+      tweetIds = this.reduceIds(maxRange)
+      const marks = {}
+      const firstStepTweets = this.state.firstStep === 0 ? 0 : maxRange * this.state.firstStep
+      marks[this.state.firstStep] = firstStepTweets
+      const lastStep = this.state.lastStep === Infinity ? steps : this.state.lastStep
+      const lastStepTweets = this.state.lastStep === Infinity ? this.state.tweetIds.length : maxRange * this.state.lastStep
+      marks[lastStep] = lastStepTweets
+      slider = (
+        <div style={{marginBottom: '3em'}}>
+          <span className="OpsLabel">Limit number of tweets</span>
+          <Range allowCross={false} min={0} max={steps} defaultValue={[0, steps]} onChange={(r) => this.onSlide(r)}
+            marks={marks}/>
+        </div>
+      )
     }
-    const tweetIds = this.reduceIds(maxRange)
     return(
-      <div id="App">
+      <div id="App">  
         <Metadata metadata={this.props.metadata} />
         <div className="Operations">
           <div>
             <span className="OpsLabel">Shuffle (click or shake!) </span>
             <button onClick={() => {this.shuffle()}}>🔀</button>
           </div>
-          <div>
-            <span className="OpsLabel">Limit number of tweets</span>
-            <Range allowCross={false} min={0} max={maxRange} defaultValue={[0, maxRange]} onChange={(r) => this.onSlide(r)}/>
-          </div>
+          {slider}
           </div>
         <TweetViewer tweetIds={tweetIds} />
       </div>
