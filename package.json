@@ -1,6 +1,6 @@
 {
   "name": "tweet-archive",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A command line tool for working with tweet archives.",
   "main": "dist/builder.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "css-loader": "^2.1.0",
+    "csv-parser": "^2.3.0",
     "fs-extra": "^7.0.1",
     "html-webpack-plugin": "^3.2.0",
     "moment": "^2.24.0",
@@ -40,12 +41,13 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "tweet-viewer": "0.0.8",
+    "react-tweet-embed": "^1.2.2",
     "webpack": "^4.29.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.0.0",

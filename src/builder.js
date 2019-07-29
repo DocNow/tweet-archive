@@ -1,5 +1,6 @@
 import fs from 'fs-extra'
 import path from 'path'
+import csv from 'csv-parser'
 import readline from 'readline'
 
 class Builder {
@@ -26,23 +27,21 @@ class Builder {
       output.write(`
 __TWEET_ARCHIVE_DATA = {
   metadata: ${metadataJson},
-  ids: [
+  tweets: [
 `)
 
-      const rl = readline.createInterface({
-        input: fs.createReadStream(tweetIdFile),
-        crlfDelay: Infinity
-      })
-
-      rl.on('line', (line) => {
-        output.write('    "' + line.trim() + '",\n')
-      })
-
-      rl.on('close', () => {
-        output.write('  ]\n}')
-        output.end()
-      })
-
+      fs.createReadStream(tweetIdFile)
+        .pipe(csv())
+        .on('data', (row) => {
+          const t = {id: row.id}
+          if (row.hasOwnProperty('retweet')) t['retweet'] = row.retweet == "true"
+          if (row.hasOwnProperty('screen_name')) t['screen_name'] = row.screen_name
+          output.write('    ' + JSON.stringify(t) + ',\n')
+        })
+        .on('end', () => {
+          output.write('  ]\n}')
+          output.end()
+        })
     })
 
   }

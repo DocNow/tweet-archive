@@ -3,23 +3,6 @@ import PropTypes from 'prop-types';
 import './Metadata.css';
 
 class Metadata extends React.Component {
-  constructor() {
-    super()
-    this.months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ]
-  }
   
   get startDate() {
     return new Date(this.props.metadata.startDate)
@@ -27,10 +10,6 @@ class Metadata extends React.Component {
 
   get endDate() {
     return new Date(this.props.metadata.endDate)
-  }
-
-  formatDate(date) {
-    return `${date.getDate()} ${this.months[date.getMonth()]}, ${date.getFullYear()}`
   }
 
   render() {
@@ -48,7 +27,7 @@ class Metadata extends React.Component {
           </div>
           <div>
             <span className="Label">Tweets archived between:</span> 
-            {this.formatDate(this.startDate)} - <br/>{this.formatDate(this.endDate)}
+            {this.startDate.toLocaleDateString()} - {this.endDate.toLocaleDateString()}
           </div>
         </div>
       </div>

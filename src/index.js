@@ -7,5 +7,5 @@ import App from './containers/App'
 ReactDOM.render(
   <App
     metadata={__TWEET_ARCHIVE_DATA.metadata}
-    tweetIds={__TWEET_ARCHIVE_DATA.ids} />,
+    tweets={__TWEET_ARCHIVE_DATA.tweets} />,
   document.getElementById('root'))

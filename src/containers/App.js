@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import TweetViewer from 'tweet-viewer'
+import TweetViewer from '../components/TweetViewer'
 import Metadata from '../components/Metadata'
 import Range from 'rc-slider/lib/Range';
 import Shake from 'shake.js'
@@ -14,14 +14,15 @@ class App extends React.Component {
     const steps = 30
     this.state = {
       firstStep: 0,
-      lastStep: steps
+      lastStep: steps,
+      displayRetweets: false
     }
     this.steps = steps
   }
 
   componentDidMount() {
     this.setState({
-      tweetIds: this.props.tweetIds
+      tweets: this.props.tweets
     })
     this.shakeEvent = new Shake({
       threshold: 15,
@@ -34,9 +35,8 @@ class App extends React.Component {
   }
 
   reduceIds(tweetsPerStep) {
-    // const tot = this.state.tweetIds.length
     const firstStep = this.state.firstStep
-    return this.state.tweetIds.reduce((acc, id, idx) => {
+    return this.state.tweets.reduce((acc, id, idx) => {
       if (idx >= tweetsPerStep * firstStep && idx < tweetsPerStep * this.state.lastStep) {
         acc.push(id)
       }
@@ -63,32 +63,36 @@ class App extends React.Component {
   }
 
   shuffle() {
-    const tis = Array.from(this.state.tweetIds)
+    const tis = Array.from(this.state.tweets)
     for (let i = tis.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [tis[i], tis[j]] = [tis[j], tis[i]];
     }
     this.setState({
-      tweetIds: tis
+      tweets: tis
     })
     this.resetIds()
   }
 
+  displayRetweets(display) {
+    this.setState({displayRetweets: display})
+  }
+
   render() {
-    if (!this.state.tweetIds) {
+    if (!this.state.tweets) {
       return null
     }
     // Bring range of tweets to a more manageable number
-    let maxRange = this.state.tweetIds.length
-    let tweetIds = this.state.tweetIds
+    let maxRange = this.state.tweets.length
+    let tweets = this.state.tweets
     let slider = null
     if (maxRange > this.steps) {
-      maxRange = Math.ceil(this.state.tweetIds.length / this.steps)
-      tweetIds = this.reduceIds(maxRange)
+      maxRange = Math.ceil(this.state.tweets.length / this.steps)
+      tweets = this.reduceIds(maxRange)
       const marks = {}
       const firstStepTweets = this.state.firstStep === 0 ? 0 : maxRange * this.state.firstStep
       marks[this.state.firstStep] = firstStepTweets
-      const lastStepTweets = this.state.lastStep === Infinity ? this.state.tweetIds.length : maxRange * this.state.lastStep
+      const lastStepTweets = this.state.lastStep === Infinity ? this.state.tweets.length : maxRange * this.state.lastStep
       marks[this.state.lastStep] = lastStepTweets
       slider = (
         <div style={{marginBottom: '3em'}}>
@@ -106,9 +110,13 @@ class App extends React.Component {
             <span className="OpsLabel">Shuffle (click or shake!) </span>
             <button onClick={() => {this.shuffle()}}>🔀</button>
           </div>
+          <div>
+            <span className="OpsLabel">Display retweets </span>
+            <input type="checkbox" onClick={(e) => {this.displayRetweets(e.target.checked)}} />
+          </div>
           {slider}
           </div>
-        <TweetViewer tweetIds={tweetIds} />
+        <TweetViewer tweets={tweets} displayRetweets={this.state.displayRetweets} />
       </div>
     )
   }
@@ -116,7 +124,7 @@ class App extends React.Component {
 
 App.propTypes = {
   metadata: PropTypes.object.isRequired,
-  tweetIds: PropTypes.array.isRequired
+  tweets: PropTypes.array.isRequired
 }
 
 export default App
