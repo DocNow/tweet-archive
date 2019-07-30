@@ -11,7 +11,8 @@
     "build-lib": "cross-env BABEL_ENV=cli babel src/builder.js -d dist/",
     "copy-site": "cp -pr src/site dist/site",
     "build": "npm run clean && npm run copy-site && npm run build-cli && npm run build-lib && npm run build-app",
-    "test": "npm run build && cross-env BABEL_ENV=cli mocha --colors --reporter spec --require @babel/register test.js"
+    "test": "npm run build && cross-env BABEL_ENV=cli mocha --colors --reporter spec --require @babel/register test.js",
+    "ghpages": "node bin/ghpages.js"
   },
   "bin": {
     "tweet-archive": "dist/cli/tweet-archive.js",
@@ -60,6 +61,7 @@
     "eslint": "^5.15.1",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-react": "^7.12.4",
+    "gh-pages": "^2.0.1",
     "mocha": "^6.0.1",
     "rc-slider": "^8.6.8",
     "rimraf": "^2.6.3",
