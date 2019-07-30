@@ -1,6 +1,6 @@
 
 __TWEET_ARCHIVE_DATA = {
-  metadata: {"title":"Test Archive","creator":"Raff Viglianti","startDate":"2018-12-17T11:05:40.642Z","endDate":"2018-12-18T01:33:11.989Z","searchQuery":"#opera"},
+  metadata: {"title":"tweet-archive test","creator":"Raff Viglianti","startDate":"2018-12-17T11:05:40.642Z","endDate":"2018-12-18T01:33:11.989Z","searchQuery":"#opera"},
   tweets: [
     {"id":"1074539600348102657","retweet":false,"screen_name":"rapperstory_"},
     {"id":"1074555811429404672","retweet":true,"screen_name":"Danii_bebe35"},
