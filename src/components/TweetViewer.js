@@ -46,10 +46,7 @@ class TweetViewer extends Component {
         tweets
           .filter(t => this.props.displayRetweets || t.retweet == false)
           .slice(0, this.state.postsToShow).map((t, i) => {
-          return (<TweetEmbed
-            key={`t${i}`}
-            id={t.id}
-            options={{cards: 'hidden'}} />)
+          return <TweetEmbed key={`t${i}`} id={t.id} />
         })
       }</div>
     </div>)
