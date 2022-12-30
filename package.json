@@ -62,7 +62,7 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-react": "^7.12.4",
     "gh-pages": "^2.0.1",
-    "mocha": "^7.1.1",
+    "mocha": "^10.2.0",
     "rc-slider": "^8.6.8",
     "rimraf": "^2.6.3",
     "shake.js": "^1.2.2",
